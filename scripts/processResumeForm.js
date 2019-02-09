@@ -110,7 +110,7 @@ function loadResumeFormManual() {
     loadResumeForm();
 }
 
-function createResume() {
+function previewResume() {
 
     document.getElementById("resumeDocumentName").innerHTML = JSON["name"];
 
