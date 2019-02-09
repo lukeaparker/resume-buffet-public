@@ -20,15 +20,15 @@ initializeFirebase();
 
 function getUserJSON(uID) {
     var post = db.collection("users").doc(uID);
-    var one = post.get().then(function(doc) {
+    var one = post.get().then(function (doc) {
         if (doc.exists) {
             // console.log("Document data:", doc.data());
             return doc.data();
         } else {
             return null;
         }
-        
-    }).catch(function(error) {
+
+    }).catch(function (error) {
         console.log("Error getting document:", error);
     });
     return Promise.all([one]);
@@ -36,15 +36,15 @@ function getUserJSON(uID) {
 
 function getResumeJSON(rID) {
     var post = db.collection("resumes").doc(rID);
-    var one = post.get().then(function(doc) {
+    var one = post.get().then(function (doc) {
         if (doc.exists) {
             // console.log("Document data:", doc.data());
             return doc.data();
         } else {
             return null;
         }
-        
-    }).catch(function(error) {
+
+    }).catch(function (error) {
         console.log("Error getting document:", error);
     });
     return Promise.all([one]);
@@ -52,15 +52,15 @@ function getResumeJSON(rID) {
 
 function getItemJSON(iID) {
     var post = db.collection("items").doc(iID);
-    var one = post.get().then(function(doc) {
+    var one = post.get().then(function (doc) {
         if (doc.exists) {
             // console.log("Document data:", doc.data());
             return doc.data();
         } else {
             return null;
         }
-        
-    }).catch(function(error) {
+
+    }).catch(function (error) {
         console.log("Error getting document:", error);
     });
     return Promise.all([one]);
@@ -68,22 +68,22 @@ function getItemJSON(iID) {
 
 function createUser(uID, userInfo) {
     var newUser = db.collection("users").doc(uID);
-    var one = newUser.get().then(function(doc) {
+    var one = newUser.get().then(function (doc) {
         if (doc.exists) {
             console.log(uID + " exists");
             return 1;
         } else {
             console.log(uID + " does not exist");
             newUser.set(userInfo)
-            .then(function() {
-                console.log("Document successfully written!");
-            })
-            .catch(function(error) {
-                console.error("Error writing document: ", error);
-            });
+                .then(function () {
+                    console.log("Document successfully written!");
+                })
+                .catch(function (error) {
+                    console.error("Error writing document: ", error);
+                });
             return 0;
         }
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.log("Error getting document:", error);
     });
     return Promise.all([one]);
@@ -114,26 +114,26 @@ function updateResumeInfo(oldResumeID) {
     }
     if (oldResumeID != null) {
         var initialResumeRequest = getResumeJSON(oldResumeID);
-        initialResumeRequest.then(function(oldResumeJSON) {
-            var categories = ["email","phone","address","website","summary","cert"];
+        initialResumeRequest.then(function (oldResumeJSON) {
+            var categories = ["email", "phone", "address", "website", "summary", "cert"];
             completeJSON.name = oldResumeJSON.name;
             completeJSON.id = oldResumeJSON.id;
             var status = [];
             for (var i = 0; i < categories.length; i++) {
                 status.push(singleLineSegmentAnalysis(oldResumeJSON, completeJSON, categories[i]));
             }
-            status.then(function() {
+            status.then(function () {
                 console.log(completeJSON);
             });
         });
     } else {
         completeJSON.name = "New Resume";
-        var categories = ["email","phone","address","website","summary","cert"];
+        var categories = ["email", "phone", "address", "website", "summary", "cert"];
         var status = [];
         for (var i = 0; i < categories.length; i++) {
             status.push(singleLineSegmentAnalysis(null, completeJSON, categories[i]));
         }
-        return Promise.all(status).then(function() {
+        return Promise.all(status).then(function () {
             //console.log(status);
             //console.log(completeJSON);
             return completeJSON
@@ -154,11 +154,15 @@ function singleLineSegmentAnalysis(oldJSON, newJSON, tag) {
         }
         complete.push(getItemJSON(newJSON[tag + "ID"][i]));
     }
-    var allDone = Promise.all(complete).then(function(results){
+    var allDone = Promise.all(complete).then(function (results) {
         for (var i = 0; i < results.length; i++) {
             if (results[0] != null) {
                 //console.log(results[0][i]);
-                newJSON[tag + "Value"][i] = results[i][0].value;
+                try {
+                    newJSON[tag + "Value"][i] = results[i][0].value;
+                } catch (err) {
+                    console.log(err);
+                }
             }
         }
     });
