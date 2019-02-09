@@ -9,7 +9,7 @@
 }
 
 .row {
-    margin: 5px;
+    margin: 10px;
 }
 
 .bold {
@@ -18,4 +18,8 @@
 
 .display-block {
     display: block !important;
+}
+
+.btn {
+    margin: 10px;
 }
