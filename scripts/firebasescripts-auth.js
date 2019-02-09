@@ -21,8 +21,10 @@ function loadCurrentUser(authCurrentUser, callback) {
                 var userInfo = {
                     "id": userID,
                     "name": authCurrentUser.displayName,
-                    "account-email": authCurrentUser.email,
-                    "display-email": authCurrentUser.email,
+                    "account_email": authCurrentUser.email,
+                    "display_email": authCurrentUser.email,
+                    "phone": "",
+                    "address": ""
                 }
                 var promise = createUser(userID, userInfo);
                 promise.then(function() {
