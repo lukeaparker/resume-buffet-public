@@ -34,6 +34,38 @@ function getUserJSON(uID) {
     return Promise.all([one]);
 }
 
+function getResumeJSON(rID) {
+    var post = db.collection("resumes").doc(rID);
+    var one = post.get().then(function(doc) {
+        if (doc.exists) {
+            // console.log("Document data:", doc.data());
+            return doc.data();
+        } else {
+            return null;
+        }
+        
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    return Promise.all([one]);
+}
+
+function getItemJSON(iID) {
+    var post = db.collection("items").doc(iID);
+    var one = post.get().then(function(doc) {
+        if (doc.exists) {
+            // console.log("Document data:", doc.data());
+            return doc.data();
+        } else {
+            return null;
+        }
+        
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    return Promise.all([one]);
+}
+
 function createUser(uID, userInfo) {
     var newUser = db.collection("users").doc(uID);
     var one = newUser.get().then(function(doc) {

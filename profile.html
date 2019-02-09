@@ -19,10 +19,10 @@
   </head>
   <body>
 
-    <div id="wrapper">
+    <div id="profileWrapper">
 
       <div include-html="template/navbar.html"></div>
-      <div class="content">
+      <div class="content" style="margin: 20px;">
             <div id="messages"></div>
             <h1 class="center">Profile</h1>
             <div class="profile-line contentBackground addPadding noScroll">
@@ -34,15 +34,9 @@
                     <span id="userName"></span>
                 </div><br />
                 <form id="editNameForm" style="display: none;">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 name">
-                            <input type="text" name="newName" id="newName" class="surroundSpace fullWidth textStyle" />
-                        </div>
-                        <div class="col-sm-auto">
-                            <input type="button" onclick="updateName();" value="Update" class="btn btn-outline-info surroundSpace" />
-                            <input type="button" onclick="toggleEdit('Name');" value="Cancel" class="btn btn-outline-info surroundSpace" />
-                        </div>
-                    </div>
+                    <input type="text" name="newName" id="newName" class="surroundSpace fullWidth textStyle" /> 
+                    <input type="button" onclick="updateName();" value="Update" class="btn btn-outline-info surroundSpace" />
+                    <input type="button" onclick="toggleEdit('Name');" value="Cancel" class="btn btn-outline-info surroundSpace" />
                 </form>
             </div>
 
@@ -57,15 +51,8 @@
                     <span id="userAccountEmail"></span>
                 </div><br />
                 <form id="editAccountEmailForm" style="display: none;">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <input type="text" name="newAccountEmail" id="newAccountEmail" style="width: 100%;" class="surroundSpace fullWidth textStyle" />
-                        </div>
-                        <div class="col-sm-auto">
-                            <input type="button" onclick="updateAccountEmail();" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('AccountEmail');" value="Cancel" class="btn btn-outline-info surroundSpace" />
-                        </div>
-                    </div>
-
+                    <input type="text" name="newAccountEmail" id="newAccountEmail" style="width: calc(100vw - 300px);" class="surroundSpace fullWidth textStyle" />
+                    <input type="button" onclick="updateAccountEmail();" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('AccountEmail');" value="Cancel" class="btn btn-outline-info surroundSpace" />
                 </form>
             </div>
 
@@ -78,16 +65,10 @@
                     <span id="userPassword"></span>
                 </div><br />
                 <form id="editPasswordForm" style="display: none;">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <input type="password" name="newPassword" id="newPassword" placeholder="New Password" class="surroundSpace fullWidth textStyle" />
-                            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" class="surroundSpace fullWidth textStyle" />
-                        </div>
-                        <div class="col-sm-auto">
-                            <input type="button" onclick="updatePassword();" value="Update" class="btn btn-outline-info surroundSpace" />
-                            <input type="button" onclick="toggleEdit('Password');" value="Cancel" class="btn btn-outline-info surroundSpace" />
-                        </div>
-                    </div>
+                    <input type="password" name="newPassword" id="newPassword" placeholder="New Password" class="surroundSpace fullWidth textStyle" />
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" class="surroundSpace fullWidth textStyle" />
+                    <input type="button" onclick="updatePassword();" value="Update" class="btn btn-outline-info surroundSpace" />
+                    <input type="button" onclick="toggleEdit('Password');" value="Cancel" class="btn btn-outline-info surroundSpace" />
                 </form>
             </div>
 
@@ -115,71 +96,83 @@
           <h2>Resume Information</h2>
           <h3>Basic Contact Information</h3>
           
+          <h4>Email Addresses</h4>
+          <div id="listEmails"></div>
           <div class="profile-line contentBackground addPadding noScroll">
-                <div class="floatLeft">
-                    <a id="editDisplayEmailIcon">
-                        <i class="far fa-edit"></i>
-                    </a>
-                    <strong>Display Email: </strong>
-                    <span id="userDisplayEmail"></span>
+              <div class="floatLeft">
+                    <strong>Add Another Email Address: </strong>
                 </div><br />
-                <form id="editDisplayEmailForm" style="display: none;">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <input type="text" name="newDisplayEmail" id="newDisplayEmail" style="width: 100%;" class="surroundSpace fullWidth textStyle" />
-                        </div>
-                        <div class="col-sm-auto">
-                            <input type="button" onclick="updateResumeElement('display_email', 'DisplayEmail');" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('DisplayEmail');" value="Cancel" class="btn btn-outline-info surroundSpace" />
-                        </div>
-                    </div>
+                <form id="AddEmailForm">
+                    <input type="text" name="newEmail" id="newEmail" style="width: calc(100vw - 300px);" class="surroundSpace fullWidth textStyle" /> <input type="button" onclick="addSingleLineItem('emails','email','Email');" value="Add" class="btn btn-outline-info surroundSpace seperateRight" />
 
                 </form>
             </div>
           
+          <h4>Phone Numbers</h4>
+          <div id="listPhones"></div>
           <div class="profile-line contentBackground addPadding noScroll">
-                <div class="floatLeft">
-                    <a id="editPhoneIcon">
-                        <i class="far fa-edit"></i>
-                    </a>
-                    <strong>Phone Number: </strong>
-                    <span id="userPhone"></span>
+              <div class="floatLeft">
+                    <strong>Add Another Phone: </strong>
                 </div><br />
-                <form id="editPhoneForm" style="display: none;">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <input type="text" name="newPhone" id="newPhone" style="width: 100%;" class="surroundSpace fullWidth textStyle" />
-                        </div>
-                        <div class="col-sm-auto">
-                            <input type="button" onclick="updateResumeElement('phone','Phone');" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('Phone');" value="Cancel" class="btn btn-outline-info surroundSpace" />
-                        </div>
-                    </div>
+                <form id="AddPhoneForm">
+                    <input type="text" name="newPhone" id="newPhone" style="width: calc(100vw - 300px);" class="surroundSpace fullWidth textStyle" /> <input type="button" onclick="addSingleLineItem('phones','phone','Phone');" value="Add" class="btn btn-outline-info surroundSpace seperateRight" />
 
                 </form>
             </div>
           
+          <h4>Addresses</h4>
+          <p>Enter your address as follows: #### Street, City, State ZIPCODE</p>
+          <div id="listAddresses"></div>
           <div class="profile-line contentBackground addPadding noScroll">
-                <div class="floatLeft">
-                    <a id="editAddressIcon">
-                        <i class="far fa-edit"></i>
-                    </a>
-                    <strong>Address: </strong>
-                    <span id="userAddress"></span>
+              <div class="floatLeft">
+                    <strong>Add Another Address: </strong>
                 </div><br />
-                <form id="editAddressForm" style="display: none;">
-                    <label>Enter your address as follows: #### Street, City, State ZIPCODE</label>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <input type="text" name="newAddress" id="newAddress" style="width: 100%;" class="surroundSpace fullWidth textStyle" />
-                        </div>
-                        <div class="col-sm-auto">
-                            <input type="button" onclick="updateResumeElement('address','Address');" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('Address');" value="Cancel" class="btn btn-outline-info surroundSpace" />
-                        </div>
-                    </div>
+                <form id="AddAddressForm">
+                    <input type="text" name="newAddress" id="newAddress" style="width: calc(100vw - 300px);" class="surroundSpace fullWidth textStyle" /> <input type="button" onclick="addSingleLineItem('addresses','address','Address');" value="Add" class="btn btn-outline-info surroundSpace seperateRight" />
+
+                </form>
+            </div>
+          
+          <h4>Websites</h4>
+          <p>List any websites you may want employers to see (i.e. LinkedIn, GitHub, etc.)</p>
+          <div id="listWebsites"></div>
+          <div class="profile-line contentBackground addPadding noScroll">
+              <div class="floatLeft">
+                    <strong>Add Another Website: </strong>
+                </div><br />
+                <form id="AddWebsiteForm">
+                    <input type="text" name="newWebsite" id="newWebsite" style="width: calc(100vw - 300px);" class="surroundSpace fullWidth textStyle" /> <input type="button" onclick="addSingleLineItem('websites','web','Website');" value="Add" class="btn btn-outline-info surroundSpace seperateRight" />
+
+                </form>
+            </div>
+          
+          <h3>Summaries</h3>
+          <p>This is a quick description of what your objective of your resume is (I seek to gain a computer science internship; I want to work for XYZ Tech and help on the project listed on the website, etc.)</p>
+          <div id="listSummaries"></div>
+          <div class="profile-line contentBackground addPadding noScroll">
+              <div class="floatLeft">
+                    <strong>Add Another Summary: </strong>
+                </div><br />
+                <form id="AddSummaryForm">
+                    <textarea name="newSummary" id="newSummary" style="width: calc(100vw - 300px); height: 100px" class="surroundSpace fullWidth textStyle" ></textarea> <input type="button" onclick="addSingleLineItem('summaries','sum','Summary');" value="Add" class="btn btn-outline-info surroundSpace seperateRight" />
+
+                </form>
+            </div>
+          
+          
+          <h3>Certifications</h3>
+          <p>List any professional or technical certifications that you may have. Remember if they are all not applicable to one job, you can select which ones to display later.</p>
+          <div id="listCertifications"></div>
+          <div class="profile-line contentBackground addPadding noScroll">
+              <div class="floatLeft">
+                    <strong>Add Another Certification: </strong>
+                </div><br />
+                <form id="AddCertificationForm">
+                    <input type="text" name="newCertification" id="newCertification" style="width: calc(100vw - 300px);" class="surroundSpace fullWidth textStyle" /> <input type="button" onclick="addSingleLineItem('certs','cert','Certification');" value="Add" class="btn btn-outline-info surroundSpace seperateRight" />
 
                 </form>
             </div>
         </div>
-    </div>
 
     </div>
 
