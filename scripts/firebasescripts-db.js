@@ -4,12 +4,12 @@ var auth;
 var masterTID = "t-ECRMT";
 function initializeFirebase() {
     var config = {
-        apiKey: "AIzaSyAP6CteQ8w8WiC71Z071mrJ58xhO16WHxM",
-        authDomain: "spartahacksv-gcp.firebaseapp.com",
-        databaseURL: "https://spartahacksv-gcp.firebaseio.com",
-        projectId: "spartahacksv-gcp",
-        storageBucket: "spartahacksv-gcp.appspot.com",
-        messagingSenderId: "612257089466"
+        apiKey: "AIzaSyATh0-Y57g345S5v1jwAHbboFp99E3EW_4",
+        authDomain: "calvinhacks19-gcp.firebaseapp.com",
+        databaseURL: "https://calvinhacks19-gcp.firebaseio.com",
+        projectId: "calvinhacks19-gcp",
+        storageBucket: "calvinhacks19-gcp.appspot.com",
+        messagingSenderId: "915538048011"
     };
     firebase.initializeApp(config);
     auth = firebase.auth();
