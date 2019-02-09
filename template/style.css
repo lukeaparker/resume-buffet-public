@@ -1,0 +1,10 @@
+#navbar a {
+    margin: 5px;
+    font-size: 18px;
+}
+
+#navbar .navbar-brand {
+    font-size: 30px;
+    font-weight: lighter;
+}
+
