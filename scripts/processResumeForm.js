@@ -96,6 +96,8 @@ function loadResumeForm() {
 
         }
 
+        previewResume(JSON);
+
     });
 }
 
@@ -110,10 +112,10 @@ function loadResumeFormManual() {
     loadResumeForm();
 }
 
-function previewResume() {
+function previewResume(JSON) {
 
     console.log("hello");
-    document.getElementById("resumeDocumentName").innerHTML = JSON["name"];
+    document.getElementById("resumeDocumentName").innerHTML = user.name;
 
 }
 

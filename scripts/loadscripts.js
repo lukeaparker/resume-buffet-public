@@ -1,4 +1,4 @@
-"use strict";
+
 
 function includeHTML() {
     let z, i, elmnt, file, xhttp;
@@ -14,16 +14,7 @@ function includeHTML() {
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     if (this.status == 200) {
-                    elmnt.innerHTML = this.responseText;
-                        // Call processResumeForm after page loaded. This prevents null type errors
-                        if (document.body.id == "resumeBody") {
-                            try {
-                                processResumeForm();
-                                previewResume();
-                            } catch (err) {
-
-                            }
-                        }
+                        elmnt.innerHTML = this.responseText;
                     }
                     if (this.status == 404) { elmnt.innerHTML = "Page not found."; }
                     /* Remove the attribute, and call this function once more: */
