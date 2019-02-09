@@ -145,7 +145,8 @@ function previewResume() {
     if (document.getElementById("summaryContainer").innerHTML != "") {
         let summaryHeader = document.createElement("h3");
         summaryHeader.innerHTML = "Summary";
-        document.getElementById("summaryContainer").insertBefore(summaryHeader);
+        summaryHeader.classList.add("bold");
+        document.getElementById("summaryContainer").insertBefore(summaryHeader, document.getElementById("summaryContainer").childNodes[0]);
     }
 
     manageResumeContent("cert");
