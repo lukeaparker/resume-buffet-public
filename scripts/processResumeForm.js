@@ -112,6 +112,7 @@ function loadResumeFormManual() {
 
 function previewResume() {
 
+    console.log("hello");
     document.getElementById("resumeDocumentName").innerHTML = JSON["name"];
 
 }
