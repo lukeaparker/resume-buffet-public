@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="template/style.css">
+
+    <title>Raise Your Flags</title>
+  </head>
+  <body>
+
+    <div id="wrapper">
+
+      <div include-html="template/navbar.html"></div>
+      <div class="content">
+            <div id="messages"></div>
+            <h1 class="center">Profile</h1>
+            <div class="profile-line contentBackground addPadding noScroll">
+                <div class="floatLeft">
+                    <a id="editNameIcon">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <strong>Name: </strong>
+                    <span id="userName"></span>
+                </div><br />
+                <form id="editNameForm" style="display: none;">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 name">
+                            <input type="text" name="newName" id="newName" class="surroundSpace fullWidth textStyle" />
+                        </div>
+                        <div class="col-sm-auto">
+                            <input type="button" onclick="updateName();" value="Update" class="btn btn-outline-info surroundSpace" />
+                            <input type="button" onclick="toggleEdit('Name');" value="Cancel" class="btn btn-outline-info surroundSpace" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+          <h2>Account Information</h2>
+          
+            <div class="profile-line contentBackground addPadding noScroll">
+                <div class="floatLeft">
+                    <a id="editAccountEmailIcon">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <strong>Account Email: </strong>
+                    <span id="userAccountEmail"></span>
+                </div><br />
+                <form id="editAccountEmailForm" style="display: none;">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <input type="text" name="newAccountEmail" id="newAccountEmail" style="width: 100%;" class="surroundSpace fullWidth textStyle" />
+                        </div>
+                        <div class="col-sm-auto">
+                            <input type="button" onclick="updateAccountEmail();" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('AccountEmail');" value="Cancel" class="btn btn-outline-info surroundSpace" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="profile-line contentBackground addPadding noScroll">
+                <div class="floatLeft">
+                    <a id="editPasswordIcon">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <strong>Password: </strong>
+                    <span id="userPassword"></span>
+                </div><br />
+                <form id="editPasswordForm" style="display: none;">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <input type="password" name="newPassword" id="newPassword" placeholder="New Password" class="surroundSpace fullWidth textStyle" />
+                            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" class="surroundSpace fullWidth textStyle" />
+                        </div>
+                        <div class="col-sm-auto">
+                            <input type="button" onclick="updatePassword();" value="Update" class="btn btn-outline-info surroundSpace" />
+                            <input type="button" onclick="toggleEdit('Password');" value="Cancel" class="btn btn-outline-info surroundSpace" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="profile-line  contentBackground addPadding noScroll">
+                <div class="floatLeft">
+                    <a id="editImageIcon">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <strong>Profile Picture: </strong>
+                    <span id="userImage"></span>
+                </div><br />
+                <form id="editImageForm" style="display: none;">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <input type="file" name="newImage" id="newIamge" placeholder="New Profile Picture" class="surroundSpace fileUpload fullWidth" />
+                        </div>
+                        <div class="col-sm-auto">
+                            <input type="button" onclick="updateImage();" value="Update" class="btn btn-outline-info surroundSpace" />
+                            <input type="button" onclick="toggleEdit('Image');" value="Cancel" class="btn btn-outline-info surroundSpace" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+          
+          <h2>Resume Information</h2>
+          <h3>Basic Contact Information</h3>
+          
+          <div class="profile-line contentBackground addPadding noScroll">
+                <div class="floatLeft">
+                    <a id="editDisplayEmailIcon">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <strong>Display Email: </strong>
+                    <span id="userDisplayEmail"></span>
+                </div><br />
+                <form id="editDisplayEmailForm" style="display: none;">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <input type="text" name="newDisplayEmail" id="newDisplayEmail" style="width: 100%;" class="surroundSpace fullWidth textStyle" />
+                        </div>
+                        <div class="col-sm-auto">
+                            <input type="button" onclick="updateResumeElement('display_email', 'DisplayEmail');" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('DisplayEmail');" value="Cancel" class="btn btn-outline-info surroundSpace" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+          
+          <div class="profile-line contentBackground addPadding noScroll">
+                <div class="floatLeft">
+                    <a id="editPhoneIcon">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <strong>Phone Number: </strong>
+                    <span id="userPhone"></span>
+                </div><br />
+                <form id="editPhoneForm" style="display: none;">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <input type="text" name="newPhone" id="newPhone" style="width: 100%;" class="surroundSpace fullWidth textStyle" />
+                        </div>
+                        <div class="col-sm-auto">
+                            <input type="button" onclick="updateResumeElement('phone','Phone');" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('Phone');" value="Cancel" class="btn btn-outline-info surroundSpace" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+          
+          <div class="profile-line contentBackground addPadding noScroll">
+                <div class="floatLeft">
+                    <a id="editAddressIcon">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <strong>Address: </strong>
+                    <span id="userAddress"></span>
+                </div><br />
+                <form id="editAddressForm" style="display: none;">
+                    <label>Enter your address as follows: #### Street, City, State ZIPCODE</label>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <input type="text" name="newAddress" id="newAddress" style="width: 100%;" class="surroundSpace fullWidth textStyle" />
+                        </div>
+                        <div class="col-sm-auto">
+                            <input type="button" onclick="updateResumeElement('address','Address');" value="Update" class="btn btn-outline-info surroundSpace seperateRight" /><input type="button" onclick="toggleEdit('Address');" value="Cancel" class="btn btn-outline-info surroundSpace" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- SCRIPTS -->
+
+    <!-- Import on page load scripts -->
+    <script src="scripts/loadscripts.js"></script>
+
+    <!-- Import Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+    <script
+      src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+    <script src="scripts/firebasescripts-db.js"></script>
+    <script src="scripts/firebasescripts-auth.js"></script>
+    <script>
+            auth.onAuthStateChanged(function() {
+                console.log(auth.currentUser);
+                loadCurrentUser(auth.currentUser, [loginoutnav, getInfo]);
+            }, function(error) {
+                console.error(error);
+            });
+        </script>
+    <!-- Import the messager scripts -->
+    <script src="scripts/messages.js"></script>
+    
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    <!-- Import FontAwesome Edit Icon -->
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
+
+    <!-- Import profile scripts -->
+    <script src="../scripts/profilescripts.js"></script>
+
+  </body>
+</html>
