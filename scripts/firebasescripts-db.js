@@ -165,22 +165,20 @@ function singleLineSegmentAnalysis(oldJSON, newJSON, tag) {
     return allDone;
 }
 
-function addNewResume(userType, typeIDCode, htmlType) {
-    rID = typeIDCode + "-" + generateID(10);
-    var newItem = db.collection("items").doc(iID);
-    console.log(iID + " reserved");
+function addNewResume(JSON) {
+    rID = "r-" + generateID(10);
+    var newItem = db.collection("resumes").doc(rID);
+    console.log(rID + " reserved");
     var two;
-    var one = newItem.get().then(function(doc) {
+    var one = newResume.get().then(function(doc) {
         if (doc.exists) {
-            console.log(iID + " exists");
+            console.log(rID + " exists");
             console.log("Duplicate ID. Trying again...");
-            addSingleLineItem(userType, typeIDCode, htmlType)
+            addSingleLineItem(JSON)
         } else {
-            console.log(iID + " does not exist");
-            newItem.set({
-                "id": iID,
-                "value": document.getElementById("new" + htmlType).value
-            })
+            console.log(rID + " does not exist");
+            JSON.id = rID;
+            newResume.set(JSON)
             .then(function() {
                 console.log("Document successfully written!");
                 var DBUser = db.collection("users").doc(user.id);
@@ -188,12 +186,13 @@ function addNewResume(userType, typeIDCode, htmlType) {
                     if (doc.exists) {
                         // console.log("Document data:", doc.data());
                         userData = doc.data();
-                        userData[userType].push(iID);
+                        userData["resume"] = removeIDFromArray(rID);
+                        userData["resumes"].unshift(rID);
                         DBUser.set(userData)
                         .then(function() {
                             console.log("Document successfully written!");
                             loadCurrentUser(auth.currentUser, [getInfo]);
-                            addGoodMessage("Element Added Successfully");
+                            //addGoodMessage("Element Added Successfully");
                             document.getElementById("new" + htmlType).value = "";
                         })
                         .catch(function(error) {

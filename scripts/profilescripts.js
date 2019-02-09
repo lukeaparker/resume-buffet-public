@@ -68,25 +68,25 @@ function updateName() {
                 .then(function() {
                     console.log("Document successfully written!");
                     loadCurrentUser(auth.currentUser, [getInfo]);
-                    addGoodMessage("Name Updated Successfully");
+                    //addGoodMessage("Name Updated Successfully");
                     toggleEdit("Name");
                 })
                 .catch(function(error) {
                     console.error("Error writing document: ", error);
-                    addBadMessage(error);
+                    //addBadMessage(error);
                 });
                 return 0;
             } else {
                 console.log("Unable to find user " + user.id);
-                addBadMessage("Unable to find user"+ user.id);
+                //addBadMessage("Unable to find user"+ user.id);
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
-            addBadMessage(error);
+            //addBadMessage(error);
         });
     }).catch(function(error) {
         // An error happened.
-        addBadMessage(error);
+        //addBadMessage(error);
     });
 }
 
@@ -109,25 +109,25 @@ function updateAccountEmail() {
                 .then(function() {
                     console.log("Document successfully written!");
                     loadCurrentUser(auth.currentUser, [getInfo]);
-                    addGoodMessage("Account Email Updated Successfully");
+                    //addGoodMessage("Account Email Updated Successfully");
                     toggleEdit("AccountEmail");
                 })
                 .catch(function(error) {
                     console.error("Error writing document: ", error);
-                    addBadMessage(error);
+                    //addBadMessage(error);
                 });
                 return 0;
             } else {
                 console.log("Unable to find user " + user.id);
-                addBadMessage("Unable to find user"+ user.id);
+                //addBadMessage("Unable to find user"+ user.id);
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
-            addBadMessage(error);
+            //addBadMessage(error);
         });
     }).catch(function(error) {
         // An error happened.
-        addBadMessage(error);
+        //addBadMessage(error);
     });
 }
 
@@ -145,21 +145,21 @@ function updateResumeElement(userElement, htmlElement) {
             .then(function() {
                 console.log("Document successfully written!");
                 loadCurrentUser(auth.currentUser, [getInfo]);
-                addGoodMessage("Resume Element Updated Successfully");
+                //addGoodMessage("Resume Element Updated Successfully");
                 toggleEdit(htmlElement);
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
-                addBadMessage(error);
+                //addBadMessage(error);
             });
             return 0;
         } else {
             console.log("Unable to find user " + user.id);
-            addBadMessage("Unable to find user"+ user.id);
+            //addBadMessage("Unable to find user"+ user.id);
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
-        addBadMessage(error);
+        //addBadMessage(error);
     });
 }
 
@@ -171,16 +171,16 @@ function updatePassword() {
     if (newPassword == confirmPassword) {
         user.updatePassword(newPassword).then(function() {
             // Update successful.
-            addGoodMessage("Password Updated Successfully");
+            //addGoodMessage("Password Updated Successfully");
             getInfo();
             toggleEdit("Password");
         }).catch(function(error) {
             // An error happened.
-            addBadMessage(error);
+            //addBadMessage(error);
         });
     } else {
         // Mismatch Passwords
-        addBadMessage("Warning: Passwords do not match. Please try again.");
+        //addBadMessage("Warning: Passwords do not match. Please try again.");
     }
 }
 
@@ -239,21 +239,21 @@ function updateSingleLineItem(iID) {
             .then(function() {
                 console.log("Document successfully written!");
                 loadCurrentUser(auth.currentUser, [getInfo]);
-                addGoodMessage("Item Updated Successfully");
+                //addGoodMessage("Item Updated Successfully");
                 toggleEdit(iID);
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
-                addBadMessage(error);
+                //addBadMessage(error);
             });
             return 0;
         } else {
             console.log("Unable to find user " + user.id);
-            addBadMessage("Unable to find user"+ user.id);
+            //addBadMessage("Unable to find user"+ user.id);
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
-        addBadMessage(error);
+        //addBadMessage(error);
     });
 }
 
@@ -271,7 +271,7 @@ function deleteItem(userType, iID) {
                 db.collection("items").doc(iID).delete().then(function() {
                     console.log("Document successfully deleted!");
                     loadCurrentUser(auth.currentUser, [getInfo]);
-                    addGoodMessage("Element Removed Successfully");
+                    //addGoodMessage("Element Removed Successfully");
                     toggleEdit(iID);
                 }).catch(function(error) {
                     console.error("Error removing document: ", error);
@@ -279,16 +279,16 @@ function deleteItem(userType, iID) {
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
-                addBadMessage(error);
+                //addBadMessage(error);
             });
             return 0;
         } else {
             console.log("Unable to find user " + user.id);
-            addBadMessage("Unable to find user"+ user.id);
+            //addBadMessage("Unable to find user"+ user.id);
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
-        addBadMessage(error);
+        //addBadMessage(error);
     });
 }
 
@@ -320,7 +320,7 @@ function addSingleLineItem(userType, typeIDCode, htmlType) {
                         .then(function() {
                             console.log("Document successfully written!");
                             loadCurrentUser(auth.currentUser, [getInfo]);
-                            addGoodMessage("Element Added Successfully");
+                            //addGoodMessage("Element Added Successfully");
                             document.getElementById("new" + htmlType).value = "";
                         })
                         .catch(function(error) {
