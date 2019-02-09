@@ -21,7 +21,8 @@ function loadCurrentUser(authCurrentUser, callback) {
                 var userInfo = {
                     "id": userID,
                     "name": authCurrentUser.displayName,
-                    "email": authCurrentUser.email,
+                    "account-email": authCurrentUser.email,
+                    "display-email": authCurrentUser.email,
                 }
                 var promise = createUser(userID, userInfo);
                 promise.then(function() {
@@ -47,7 +48,7 @@ function loginoutnav() {
         console.log("User is not logged in");
         document.getElementById("login-nav").style.display = "block";
         document.getElementById("profile-nav").style.display = "none";
-        document.getElementById("logout").style.display = "none";
+        document.getElementById("logout-nav").style.display = "none";
     }
 }
 
