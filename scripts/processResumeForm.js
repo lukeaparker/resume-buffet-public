@@ -1,5 +1,7 @@
 // Takes JSON and autopopulates input form
 
+let JSON2 = {};
+
 /*let JSON = {
     "resumeName": "hello darkness my friend",
     "name": "John Smith",
@@ -54,7 +56,7 @@ function processSingleForm(JSON, container, formType, websiteLabel) {
     } else {
         let inputContainerDiv = document.createElement("div");
         inputContainerDiv.classList.add("form-check");
-        
+
         let label = document.createElement("label");
         label.classList.add("form-check-label");
         label.setAttribute("for", formType);
@@ -68,7 +70,7 @@ function processSingleForm(JSON, container, formType, websiteLabel) {
 // main
 
 function loadResumeForm() {
-    
+
     let JSONPromise;
     if (document.getElementById("selectResume").value.indexOf("newResume") > -1) {
         JSONPromise = updateResumeInfo(null);
@@ -77,26 +79,27 @@ function loadResumeForm() {
         JSONPromise = updateResumeInfo(document.getElementById("selectResume").value);
         document.getElementById("saveResumeButton").style.display = "";
     }
-    JSONPromise.then(function(results){
+    JSONPromise.then(function (results) {
         JSON = results;
+        JSON2 = JSON;
         console.log(JSON);
-        
+
         document.getElementById("generatedInputElementsGoHere").innerHTML = /*"<label for='resumeName'><h3>Résumé version</h3></label>" +
         */"<div class='form-group'>"/*<input type='text' placeholder='Résumé for Apple, Résumé for Samsung' class='form-control' id='resumeName' value=\""+ JSON["name"] +"\"></div>"*/
         document.getElementById("resumeName").value = JSON["name"];
-        
-        let categories = ["email","phone","address","website","summary","cert"];
-        let labels = ["Emails","Phones","Addresses","Websites","Summaries","Certifications"];
+
+        let categories = ["email", "phone", "address", "website", "summary", "cert"];
+        let labels = ["Emails", "Phones", "Addresses", "Websites", "Summaries", "Certifications"];
         for (let i = 0; i < categories.length; i++) {
 
             let container = document.createElement("div");
             document.getElementById("generatedInputElementsGoHere").appendChild(container);
-            
+
             processSingleForm(JSON, container, categories[i], labels[i]);
 
         }
 
-        previewResume(JSON);
+        previewResume();
 
     });
 }
@@ -112,10 +115,40 @@ function loadResumeFormManual() {
     loadResumeForm();
 }
 
-function previewResume(JSON) {
+// Adds and subtracts individual sections to the Resume
+function manageResumeContent(section) {
+    let children = document.getElementById(JSON2[section + "ID"][0]).parentElement.parentElement.childNodes;
+    children.forEach(function (element) {
+        if (element.nodeName == "DIV" &&
+            element.childNodes[0].checked &&
+            document.getElementById(section+"Container").innerHTML.indexOf(element.childNodes[0].nextSibling.innerHTML) == -1) {
+            document.getElementById(section+"Container").innerHTML += "<p>" + element.childNodes[0].nextSibling.innerHTML + "</p>";
+        }
+        if (element.nodeName == "DIV" &&
+            !element.childNodes[0].checked) {
+                let stringToReplace = "<p>" + element.childNodes[0].nextSibling.innerHTML + "</p>";
+            document.getElementById(section+"Container").innerHTML = document.getElementById(section+"Container")
+                .innerHTML.replace(stringToReplace, "");
+        }
+    });
+}
 
-    console.log("hello");
+function previewResume() {
+
     document.getElementById("resumeDocumentName").innerHTML = user.name;
+
+    manageResumeContent("email");
+    manageResumeContent("phone");
+    manageResumeContent("address");
+    manageResumeContent("website");
+    manageResumeContent("summary");
+    if (document.getElementById("summaryContainer").innerHTML != "") {
+        let summaryHeader = document.createElement("h3");
+        summaryHeader.innerHTML = "Summary";
+        document.getElementById("summaryContainer").insertBefore(summaryHeader);
+    }
+
+    manageResumeContent("cert");
 
 }
 
@@ -123,13 +156,13 @@ manualResumeSelection = false;
 function getResumes() {
     document.getElementById("selectResume").innerHTML = "";
     var resumeOptions = [];
-    for (var i= 0; i < user.resumes.length; i++) {
-        getResumeJSON(user.resumes[i]).then(function(results){
-            var innerHTML = "<option value='" + results[0].id + "'>" + results[0].name +"</option>"
+    for (var i = 0; i < user.resumes.length; i++) {
+        getResumeJSON(user.resumes[i]).then(function (results) {
+            var innerHTML = "<option value='" + results[0].id + "'>" + results[0].name + "</option>"
             document.getElementById("selectResume").innerHTML += innerHTML;
         });
     }
-    Promise.all(resumeOptions).then(function(){
+    Promise.all(resumeOptions).then(function () {
         document.getElementById("selectResume").innerHTML += "<option value='newResume'> + Create New Resume</option>";
         loadResumeFormAuto();
     });

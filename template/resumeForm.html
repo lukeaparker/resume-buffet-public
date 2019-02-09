@@ -2,8 +2,7 @@
     <form class="col" id="resumeForm">
         <label><span class="bold"><h1>Fill Out Form, Generate Résumé</h1></span></label>
         <label><h5>We've prepopulated this form based on your previous
-                responses.<br>
-                You can select the data you want to include in your final
+                responses. You can select the data you want to include in your final
                 version of this résumé.</h5></label>
         <label>For example, when applying for a job at Google you may wish to
             include your programming internship,
@@ -15,7 +14,7 @@
                 Resume</button></div>
         <div id="generatedInputElementsGoHere"></div>
         <div class="form-group">
-            <button class="btn btn-dark" onclick="event.preventDefault(); previewResume();">Preview Résumé</button>
+            <button class="btn btn-dark" onclick="event.preventDefault(); previewResume();" id="previewResumeButton">Preview Résumé</button>
             <button id="saveResumeButton" class="btn btn-dark"
                 onclick="updateResume(JSON);" style="display: none;">Update Résumé</button>
 
@@ -24,8 +23,8 @@
 
             <input type='text' class='form-control' id='resumeName'>
             <button class="btn btn-dark" onclick="updateResume(JSON);">Save</button>
-            <button class="btn btn-dark" onclick="deleteResume(JSON);">Delete this résumé</button>
-            <button class="btn btn-dark" onclick="printResume();">Print</button>
+            <button class="btn btn-dark" onclick="deleteResume(JSON);">Delete this Résumé</button>
+            <button class="btn btn-dark" onclick="printResume();">Print / Save to Computer</button>
             <select id="printMode"><option value="1">One Column</option><option
                     value="2">Two Columns</option>
             </select>
@@ -33,11 +32,18 @@
     </form>
     <div class="col" id="resume">
         <label><span class="bold"><h1>Your Beautiful Résumé</h1></span></label>
-        <label>See an updated preview of your new, beautiful résumé</label>
+        <label>See an preview of your new, beautiful résumé.</label>
+        <label>To update, select items you want to include from the list on the left.</label>
         <div id="resumeDocument">
 
             <h2 id="resumeDocumentName"></h2>
             <hr>
+            <div id="emailContainer"></div>
+            <div id="phoneContainer"></div>
+            <div id="addressContainer"></div>
+            <div id="websiteContainer"></div><br>
+            <div id="summaryContainer"></div><br>
+            <div id="certContainer"></div><br>
 
         </div>
 
