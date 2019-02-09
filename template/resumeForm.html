@@ -1,12 +1,18 @@
 <div class="row">
     <form class="col" id="resumeForm">
         <label><span class="bold"><h1>Fill Out Form, Generate Résumé</h1></span></label>
-        <label><h5>We've prepopulated </h5></label>
+        <label><h5>We've prepopulated this form based on your previous
+                responses.<br>
+                You can select the data you want to include in your final version of this résumé.</h5></label>
+        <label>For example, when applying for a job at Google you may wish to include your programming internship,
+        but when applying for a job at McDonalds you may wish to include your skills at handling money.</label>
         <br><br>
-        
+        <div id="generatedInputElementsGoHere"></div>
         <div class="form-group">
             <input type="submit" class="btn btn-dark" id="submit">
         </div>
     </form>
-    <div class="col"></div>
+    <div class="col" id="resume">
+        <label><span class="bold"><h1>Your Beautiful Résumé</h1></span></label>
+    </div>
 </div>

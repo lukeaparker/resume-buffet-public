@@ -1,4 +1,4 @@
-var testResumeJSON = {
+let testResumeJSON = {
 	name: "Test Resume",
 	websiteID: ["web-1","web-2","web-3"],
 	websiteValue: ["linkedin", "github", "twitter"],
