@@ -4,7 +4,21 @@
 }
 
 #navbar .navbar-brand {
-    font-size: 30px;
-    font-weight: lighter;
+    margin-left: 22px;
+    font-size: 25px;
 }
 
+.jumbotron {
+    margin-top: 50px;
+}
+
+#wrapper .row {
+    margin: 0;
+}
+#wrapper h1 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+html, body {
+    background-color: #e9ecef;
+}
