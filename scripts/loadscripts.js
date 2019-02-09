@@ -19,6 +19,7 @@ function includeHTML() {
                         if (document.body.id == "resumeBody") {
                             try {
                                 processResumeForm();
+                                createResume();
                             } catch (err) {
 
                             }

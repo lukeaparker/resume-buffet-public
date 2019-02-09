@@ -1,7 +1,8 @@
 // Takes JSON and autopopulates input form
 
 let JSON = {
-    "name": "Test Resume",
+    "resumeName": "hello darkness my friend",
+    "name": "John Smith",
     "websiteID": ["web-1", "web-2", "web-3"],
     "websiteValue": ["linkedin", "github", "twitter"],
     "websiteIsChecked": [true, false, false],
@@ -21,7 +22,7 @@ let JSON = {
     "summaryValue": ["knitting", "no"],
     "summaryIsChecked": [true, false, false],
     "certID": ["skill-1", "skill-2", "skill-3"],
-    "certValue": ["knitting", "jazz"],
+    "certValue": ["knitting and crochet", "jazz"],
     "certIsChecked": [true, true, false]
 }
 
@@ -60,10 +61,8 @@ function processSingleForm(container, formType) {
 
 function processResumeForm() {
 
-    // try
-
     document.getElementById("generatedInputElementsGoHere").innerHTML = "<label for='resumeName'><h3>Résumé version</h3></label>" +
-        "<div class='form-group'><input type='text' placeholder='Résumé for Apple, Résumé for Samsung' class='form-control' id='resumeName'></div>";
+        "<div class='form-group'><input type='text' placeholder='Résumé for Apple, Résumé for Samsung' class='form-control' id='resumeName' value=\""+ JSON["resumeName"] +"\"></div>"
 
     for (let i = 1; i < 7; i++) {
 
@@ -100,3 +99,8 @@ function processResumeForm() {
 
 }
 
+function createResume() {
+
+    document.getElementById("resumeDocumentName").innerHTML = JSON["name"];
+
+}

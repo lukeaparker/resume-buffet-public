@@ -1,0 +1,9 @@
+#resumeDocument {
+    width: 98%;
+    overflow: auto;
+    display: block;
+    border: .5px solid black;
+    box-shadow: 1px 1px 4px gray;
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+}
