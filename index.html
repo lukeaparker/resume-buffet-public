@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
       
     <!-- Import on page load scripts -->
-    <script src="../scripts/loadscripts.js"></script>
+    <script src="scripts/loadscripts.js"></script> <!-- May require ../ -->
 
     <!-- Import Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
-    <script src="../scripts/firebasescripts-db.js"></script>
-    <script src="../scripts/firebasescripts-auth.js"></script>
+    <script src="scripts/firebasescripts-db.js"></script> <!-- May require ../ -->
+    <script src="scripts/firebasescripts-auth.js"></script> <!-- May require ../ -->
     <script>
         auth.onAuthStateChanged(function() {
             console.log(auth.currentUser);
@@ -27,10 +27,12 @@
     </script>
 
     <!-- Import the messager scripts -->
-    <script src="../scripts/messages.js"></script>
+    <!-- May require ../ -->
+    <script src="scripts/messages.js"></script>
 
     <!-- Import navbar scripts -->
-    <script src="../scripts/navbarscripts.js"></script>
+    <!-- May require ../ -->
+    <script src="scripts/navbarscripts.js"></script>
 
     <title>Resume Builder</title>
   </head>
