@@ -146,14 +146,18 @@ function previewResume() {
     manageResumeContent("address");
     manageResumeContent("website");
     manageResumeContent("summary");
-    if (document.getElementById("summaryContainer").innerHTML != "") {
-        let summaryHeader = document.createElement("h3");
-        summaryHeader.innerHTML = "Summary";
-        summaryHeader.classList.add("bold");
-        document.getElementById("summaryContainer").insertBefore(summaryHeader, document.getElementById("summaryContainer").childNodes[0]);
+    if (document.getElementById("summaryContainer").innerHTML == "") {
+        document.getElementById("summaryHeader").style.display = "none";
+    } else {
+        document.getElementById("summaryHeader").style.display = "";
     }
 
     manageResumeContent("cert");
+    if (document.getElementById("certContainer").innerHTML == "") {
+        document.getElementById("certHeader").style.display = "none";
+    } else {
+        document.getElementById("certHeader").style.display = "";
+    }
 
 }
 
