@@ -117,20 +117,24 @@ function loadResumeFormManual() {
 
 // Adds and subtracts individual sections to the Resume
 function manageResumeContent(section) {
-    let children = document.getElementById(JSON2[section + "ID"][0]).parentElement.parentElement.childNodes;
-    children.forEach(function (element) {
-        if (element.nodeName == "DIV" &&
-            element.childNodes[0].checked &&
-            document.getElementById(section+"Container").innerHTML.indexOf(element.childNodes[0].nextSibling.innerHTML) == -1) {
-            document.getElementById(section+"Container").innerHTML += "<p>" + element.childNodes[0].nextSibling.innerHTML + "</p>";
-        }
-        if (element.nodeName == "DIV" &&
-            !element.childNodes[0].checked) {
+    try {
+        let children = document.getElementById(JSON2[section + "ID"][0]).parentElement.parentElement.childNodes;
+        children.forEach(function (element) {
+            if (element.nodeName == "DIV" &&
+                element.childNodes[0].checked &&
+                document.getElementById(section + "Container").innerHTML.indexOf(element.childNodes[0].nextSibling.innerHTML) == -1) {
+                document.getElementById(section + "Container").innerHTML += "<p>" + element.childNodes[0].nextSibling.innerHTML + "</p>";
+            }
+            if (element.nodeName == "DIV" &&
+                !element.childNodes[0].checked) {
                 let stringToReplace = "<p>" + element.childNodes[0].nextSibling.innerHTML + "</p>";
-            document.getElementById(section+"Container").innerHTML = document.getElementById(section+"Container")
-                .innerHTML.replace(stringToReplace, "");
-        }
-    });
+                document.getElementById(section + "Container").innerHTML = document.getElementById(section + "Container")
+                    .innerHTML.replace(stringToReplace, "");
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 function previewResume() {
