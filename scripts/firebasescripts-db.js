@@ -164,3 +164,56 @@ function singleLineSegmentAnalysis(oldJSON, newJSON, tag) {
     });
     return allDone;
 }
+
+function addNewResume(userType, typeIDCode, htmlType) {
+    rID = typeIDCode + "-" + generateID(10);
+    var newItem = db.collection("items").doc(iID);
+    console.log(iID + " reserved");
+    var two;
+    var one = newItem.get().then(function(doc) {
+        if (doc.exists) {
+            console.log(iID + " exists");
+            console.log("Duplicate ID. Trying again...");
+            addSingleLineItem(userType, typeIDCode, htmlType)
+        } else {
+            console.log(iID + " does not exist");
+            newItem.set({
+                "id": iID,
+                "value": document.getElementById("new" + htmlType).value
+            })
+            .then(function() {
+                console.log("Document successfully written!");
+                var DBUser = db.collection("users").doc(user.id);
+                two = DBUser.get().then(function(doc) {
+                    if (doc.exists) {
+                        // console.log("Document data:", doc.data());
+                        userData = doc.data();
+                        userData[userType].push(iID);
+                        DBUser.set(userData)
+                        .then(function() {
+                            console.log("Document successfully written!");
+                            loadCurrentUser(auth.currentUser, [getInfo]);
+                            addGoodMessage("Element Added Successfully");
+                            document.getElementById("new" + htmlType).value = "";
+                        })
+                        .catch(function(error) {
+                            console.error("Error writing document: ", error);
+                        });
+                        return 0;
+                    } else {
+                        console.log("Error: parent does not exist!");
+                        return 1;
+                    }
+                }).catch(function(error) {
+                    console.log("Error getting document:", error);
+                });
+            }).catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+            return 0;
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    return Promise.all([one,two]);
+}
