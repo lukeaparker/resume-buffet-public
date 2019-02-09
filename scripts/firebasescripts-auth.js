@@ -51,11 +51,13 @@ function loginoutnav() {
         console.log("User is logged in");
         document.getElementById("login-nav").style.display = "none";
         document.getElementById("profile-nav").style.display = "block";
+        document.getElementById("resume-nav").style.display = "block";
         document.getElementById("logout-nav").style.display = "block";
     } else {
         console.log("User is not logged in");
         document.getElementById("login-nav").style.display = "block";
         document.getElementById("profile-nav").style.display = "none";
+        document.getElementById("resume-nav").style.display = "none";
         document.getElementById("logout-nav").style.display = "none";
     }
 }
