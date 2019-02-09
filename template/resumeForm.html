@@ -1,5 +1,5 @@
 <div class="row">
-    <form class="col" id="resumeForm" onsubmit="event.preventDefault(); createResume();">
+    <form class="col" id="resumeForm">
         <label><span class="bold"><h1>Fill Out Form, Generate Résumé</h1></span></label>
         <label><h5>We've prepopulated this form based on your previous
                 responses.<br>
@@ -7,9 +7,17 @@
         <label>For example, when applying for a job at Google you may wish to include your programming internship,
         but when applying for a job at McDonalds you may wish to include your skills at handling money.</label>
         <br><br>
+        <div><select id="selectResume">
+            </select><button class="btn btn-dark" onclick="loadResumeFormManual();">Load Resume</button></div>
         <div id="generatedInputElementsGoHere"></div>
         <div class="form-group">
-            <input type="submit" class="btn btn-dark" id="submit">
+            <button class="btn btn-dark" onclick="previewResume();">Preview</button>
+            <button id="saveResumeButton" class="btn btn-dark" onclick="updateResume(JSON);" style="display: none;">Save</button>
+            <input type='text' class='form-control' id='resumeName'>
+            <button class="btn btn-dark" onclick="updateResume(JSON);">Save As</button>
+            <button class="btn btn-dark" onclick="deleteResume(JSON);">Delete</button>
+            <select id="printMode"><option value="1">One Column</option><option value="2">Two Columns</option>
+            </select><button class="btn btn-dark" onclick="printResume();">Save and Print</button>
         </div>
     </form>
     <div class="col" id="resume">

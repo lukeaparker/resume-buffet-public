@@ -88,3 +88,79 @@ function createUser(uID, userInfo) {
     });
     return Promise.all([one]);
 }
+
+function updateResumeInfo(oldResumeID) {
+    var completeJSON = {
+        "id": "",
+        "name": "",
+        "emailID": user.emails,
+        "emailValue": [],
+        "emailIncluded": [],
+        "phoneID": user.phones,
+        "phoneValue": [],
+        "phoneIncluded": [],
+        "addressID": user.addresses,
+        "addressValue": [],
+        "addressIncluded": [],
+        "websiteID": user.websites,
+        "websiteValue": [],
+        "websiteIncluded": [],
+        "summaryID": user.summaries,
+        "summaryValue": [],
+        "summaryIncluded": [],
+        "certID": user.certs,
+        "certValue": [],
+        "certIncluded": [],
+    }
+    if (oldResumeID != null) {
+        var initialResumeRequest = getResumeJSON(oldResumeID);
+        initialResumeRequest.then(function(oldResumeJSON) {
+            var categories = ["email","phone","address","website","summary","cert"];
+            completeJSON.name = oldResumeJSON.name;
+            completeJSON.id = oldResumeJSON.id;
+            var status = [];
+            for (var i = 0; i < categories.length; i++) {
+                status.push(singleLineSegmentAnalysis(oldResumeJSON, completeJSON, categories[i]));
+            }
+            status.then(function() {
+                console.log(completeJSON);
+            });
+        });
+    } else {
+        completeJSON.name = "New Resume";
+        var categories = ["email","phone","address","website","summary","cert"];
+        var status = [];
+        for (var i = 0; i < categories.length; i++) {
+            status.push(singleLineSegmentAnalysis(null, completeJSON, categories[i]));
+        }
+        return Promise.all(status).then(function() {
+            //console.log(status);
+            //console.log(completeJSON);
+            return completeJSON
+        });
+    }
+}
+
+function singleLineSegmentAnalysis(oldJSON, newJSON, tag) {
+    var complete = [];
+    for (var i = 0; i < newJSON[tag + "ID"].length; i++) {
+        newJSON[tag + "Included"][i] = false;
+        if (oldJSON != null) {
+            for (var j = 0; j < oldJSON[tag + "ID"].length; j++) {
+                if (oldJSON[tag + "ID"][j].indexOf(newJSON[tag + "ID"][i]) > -1) {
+                    newJSON[tag + "Included"][i] = oldJSON[tag + "Included"][j];
+                }
+            }
+        }
+        complete.push(getItemJSON(newJSON[tag + "ID"][i]));
+    }
+    var allDone = Promise.all(complete).then(function(results){
+        for (var i = 0; i < results.length; i++) {
+            if (results[0] != null) {
+                //console.log(results[0][i]);
+                newJSON[tag + "Value"][i] = results[i][0].value;
+            }
+        }
+    });
+    return allDone;
+}

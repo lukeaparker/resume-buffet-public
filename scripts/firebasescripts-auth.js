@@ -29,7 +29,8 @@ function loadCurrentUser(authCurrentUser, callback) {
                     "websites": [],
                     "summaries": [],
                     "certs": [],
-                    "skills": []
+                    "skills": [],
+                    "resumes": []
                 }
                 var promise = createUser(userID, userInfo);
                 promise.then(function() {
