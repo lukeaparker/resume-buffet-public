@@ -17,3 +17,42 @@ function initializeFirebase() {
 }
 
 initializeFirebase();
+
+function getUserJSON(uID) {
+    var post = db.collection("users").doc(uID);
+    var one = post.get().then(function(doc) {
+        if (doc.exists) {
+            // console.log("Document data:", doc.data());
+            return doc.data();
+        } else {
+            return null;
+        }
+        
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    return Promise.all([one]);
+}
+
+function createUser(uID, userInfo) {
+    var newUser = db.collection("users").doc(uID);
+    var one = newUser.get().then(function(doc) {
+        if (doc.exists) {
+            console.log(uID + " exists");
+            return 1;
+        } else {
+            console.log(uID + " does not exist");
+            newUser.set(userInfo)
+            .then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+            return 0;
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    return Promise.all([one]);
+}
