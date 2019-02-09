@@ -5,13 +5,13 @@ function loginoutnav() {
     if (user) {
         // User is signed in.
         console.log("User is logged in");
-        document.getElementById("lptext").innerHTML = "Profile";
-        document.getElementById("lphref").href = "../profile.html";
-        document.getElementById("logout").style.display = "block";
+        document.getElementById("login-nav").style.display = "none";
+        document.getElementById("account-nav").style.display = "block";
+        document.getElementById("logout-nav").style.display = "block";
     } else {
         console.log("User is not logged in");
-        document.getElementById("lptext").innerHTML = "Login";
-        document.getElementById("lphref").href = "../login.html";
+        document.getElementById("login-nav").style.display = "block";
+        document.getElementById("account-nav").style.display = "none";
         document.getElementById("logout").style.display = "none";
     }
     document.getElementById("lphref").style.display = "block";
