@@ -39,49 +39,5 @@ function saveResume() {
     FirebaseJSON.id = rID;
     FirebaseJSON.name = document.getElementById("resumeName").value;
     console.log(FirebaseJSON);
-    var newResume = db.collection("resumes").doc(rID);
-    console.log(rID + " reserved");
-    var two;
-    var one = newResume.get().then(function(doc) {
-        if (doc.exists) {
-            console.log(rID + " exists");
-            console.log("Duplicate ID. Trying again...");
-            saveResume();
-        } else {
-            console.log(rID + " does not exist");
-            newResume.set(FirebaseJSON)
-            .then(function() {
-                console.log("Document successfully written!");
-                var DBUser = db.collection("users").doc(user.id);
-                two = DBUser.get().then(function(doc) {
-                    if (doc.exists) {
-                        // console.log("Document data:", doc.data());
-                        userData = doc.data();
-                        userData["resumes"] = removeIDFromArray(rID);
-                        userData["resumes"].unshift(rID);
-                        DBUser.set(userData)
-                        .then(function() {
-                            console.log("Document successfully written!");
-                            //addGoodMessage("Element Added Successfully");
-                        })
-                        .catch(function(error) {
-                            console.error("Error writing document: ", error);
-                        });
-                        return 0;
-                    } else {
-                        console.log("Error: parent does not exist!");
-                        return 1;
-                    }
-                }).catch(function(error) {
-                    console.log("Error getting document:", error);
-                });
-            }).catch(function(error) {
-                console.error("Error writing document: ", error);
-            });
-            return 0;
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
-    return Promise.all([one,two]);
+    saveResumeFirebase(FirebaseJSON);
 }

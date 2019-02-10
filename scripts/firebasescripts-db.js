@@ -18,6 +18,20 @@ function initializeFirebase() {
 
 initializeFirebase();
 
+firebase.firestore().enablePersistence()
+  .catch(function(err) {
+      if (err.code == 'failed-precondition') {
+          // Multiple tabs open, persistence can only be enabled
+          // in one tab at a a time.
+          // ...
+      } else if (err.code == 'unimplemented') {
+          // The current browser does not support all of the
+          // features required to enable persistence
+          // ...
+      }
+  });
+// Subsequent queries will use persistence, if it was enabled successfully
+
 function getUserJSON(uID) {
     var post = db.collection("users").doc(uID);
     var one = post.get().then(function (doc) {
@@ -167,4 +181,55 @@ function singleLineSegmentAnalysis(oldJSON, newJSON, tag) {
         }
     });
     return allDone;
+}
+
+function saveResumeFirebase() {
+    iID = "resume-" + generateID(10);
+    var newItem = db.collection("resumes").doc(iID);
+    console.log(iID + " reserved");
+    var two;
+    var one = newItem.get().then(function(doc) {
+        if (doc.exists) {
+            console.log(iID + " exists");
+            console.log("Duplicate ID. Trying again...");
+            saveResumeFirebase();
+        } else {
+            console.log(iID + " does not exist");
+            newItem.set({
+                "id": iID,
+            })
+            .then(function() {
+                console.log("Document successfully written!");
+                var DBUser = db.collection("users").doc(user.id);
+                two = DBUser.get().then(function(doc) {
+                    if (doc.exists) {
+                        // console.log("Document data:", doc.data());
+                        userData = doc.data();
+                        userData["resumes"].push(iID);
+                        DBUser.set(userData)
+                        .then(function() {
+                            console.log("Document successfully written!");
+                            loadCurrentUser(auth.currentUser, [getInfo]);
+                            //addGoodMessage("Element Added Successfully");
+                        })
+                        .catch(function(error) {
+                            console.error("Error writing document: ", error);
+                        });
+                        return 0;
+                    } else {
+                        console.log("Error: parent does not exist!");
+                        return 1;
+                    }
+                }).catch(function(error) {
+                    console.log("Error getting document:", error);
+                });
+            }).catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+            return 0;
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    return Promise.all([one,two]);
 }
