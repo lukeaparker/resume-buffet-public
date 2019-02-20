@@ -2,32 +2,6 @@
 
 let JSON2 = {};
 
-/*let JSON = {
-    "resumeName": "hello darkness my friend",
-    "name": "John Smith",
-    "websiteID": ["web-1", "web-2", "web-3"],
-    "websiteValue": ["linkedin", "github", "twitter"],
-    "websiteIsChecked": [true, false, false],
-    "skillID": ["skill-1", "skill-2", "skill-3"],
-    "skillValue": ["knitting", "swimming"],
-    "skillIsChecked": [true, false, false],
-    "emailID": ["skill-1", "skill-2", "skill-3"],
-    "emailValue": ["knitting", "swimming"],
-    "emailIsChecked": [true, false, false],
-    "phoneID": ["skill-1", "skill-2", "skill-3"],
-    "phoneValue": ["knitting", "swimming"],
-    "phoneIsChecked": [false, false, false],
-    "addressID": ["skill-1", "skill-2", "skill-3"],
-    "addressValue": ["knitting", "swimming"],
-    "addressIsChecked": [true, false, true],
-    "summaryID": ["skill-1", "skill-2", "skill-3"],
-    "summaryValue": ["knitting", "no"],
-    "summaryIsChecked": [true, false, false],
-    "certID": ["skill-1", "skill-2", "skill-3"],
-    "certValue": ["knitting and crochet", "jazz"],
-    "certIsChecked": [true, true, false]
-}*/
-
 // function for processing specific forms
 
 function processSingleForm(JSON, container, formType, websiteLabel) {
